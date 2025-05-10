@@ -1,50 +1,63 @@
+<script>
+// import FirstChild from '@/components/FirstChild.vue';
+// import { message, reversedMessage } from './keys';
+import FirstChild from './components/FirstChild.vue';
+import MyChild1 from './components/MyChild1.vue';
 
-<!-- App.vue 는 루트컴포넌트  -->
-<!-- SFC(Single File Componet) : <script>, <template> <style> 로 구성되어 있다. -->
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+export default {
+  components: {
+    FirstChild, MyChild1,
+  },
+
+  mounted(){
+      console.log(this.$refs.childref);
+      console.log(this.$refs.childNumOddAdd);
+      console.log(this.$refs.getChildnum());
+
+  },
+  // provide() {
+  //   return {
+  //     [message]: this.message,
+  //     [reversedMessage]: this.reversedMessage,
+  //   };
+  // },
+  // data() {
+  //   return {
+  //     message: 'Hello, Vue JS!',
+  //   };
+  // },
+  // computed: {
+  //   reversedMessage() {
+  //     return this.message.split('').reverse().join('');
+  //   },
+  // },
+
+  data(){
+    return{
+      parentNum : 10,
+    };
+  },
+
+  computed : {
+    numOddEven(){
+      return this.parentNum % 2 === 0 ? '짝수' : '홀수';
+    },
+  },
+
+  methods :{
+    getParentNum(){
+      return this.parentNum;
+    },
+  },
+
+
+};
 </script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <FirstChild />
+  <MyChild1 ref = "childref" />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
